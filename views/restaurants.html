@@ -1,0 +1,10 @@
+<h3>{{name}} Review</h3>
+
+<div class="row itemList">
+  <div id="mS-{{type}}" class="col-sm-4 well" ng-repeat="(name, description, image, rating) in restaurantService">
+    <p>Name: {{name}}</p>
+    <p>Description: <span class="description">{{description}}</span></p>
+    <p>Rating: {{rating}}</p>
+  </div>
+
+</div>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Urban Fork</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="http://icons.iconarchive.com/icons/icons8/windows-8/512/Food-Fork-icon.png"/>
+</head>
+
+<body ng-app="restaurantApp">
+    <div class="header" id="myHeader">
+        <h2>Urban Fork</h2>
+      </div>
+    <div class="container">
+        <div id="restaurantList" ng-controller="restaurantAppsController as app">
+            <div class="restaurantItems" ng-repeat="restaurant in app.restaurants track by $index">
+                <img class="pics" ng-class="{positive : restaurant.rating > 3, negative : restaurant.rating < 3}" ng-src="{{restaurant.image}}">
+                <p>Name: {{restaurant.name}}</p>
+                <p>Description: {{restaurant.description}}</p>
+                <p>Rating: {{restaurant.rating}}/5</p>
+                
+                
+                <div class="spacer">
+                    <span id="tooLowError" ng-hide="restaurant.rating !== 0">You cannot rate this restaurant any lower!</span>
+                    <span id="tooHighError" ng-hide="restaurant.rating !==5">You cannot rate this restaurant any higher!</span>
+                    <span id="amazing" ng-show="restaurant.rating >3">This restaurant's food is very tasty!</span>
+                    <span id="crappy" ng-show="restaurant.rating < 3">This restaurant's food is not very good!</span>
+                </div>
+              
+                <button class="btn" id="thumbsUp"  ng-click="app.thumbsUp(restaurant)" ng-class="{'disabled' : restaurant.rating ==5}" ng-disabled="restaurant.rating >4"><i class="far fa-thumbs-up"></i></button>
+                <button class="btn" id="thumbsDown" ng-click="app.thumbsDown(restaurant)" ng-class="{'disabled' : restaurant.rating ===0}" ng-disabled="restaurant.rating ===0"><i class="far fa-thumbs-down"></i></button>
+            </div>
+        </div>
+
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/restaurantAppsController.js"></script>
+    <script src="js/service/restaurantService.js"></script>
+</body>
+
+</html>
